@@ -140,24 +140,24 @@ export default function History() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.04 }}
             >
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="relative sm:flex sm:items-center sm:gap-2">
                 <Link
                   to={interview.feedback ? `/interview/feedback/${interview._id}` : '#'}
-                  className={`flex-1 flex items-center justify-between p-3 sm:p-5 rounded-2xl border border-white/[0.06] hover:border-purple-500/15 transition-all group ${
+                  className={`block sm:flex-1 flex items-center justify-between p-3 pr-10 sm:p-5 sm:pr-5 rounded-2xl border border-white/[0.06] hover:border-purple-500/15 transition-all group ${
                     !interview.feedback ? 'opacity-50' : ''
                   }`}
                   style={{ background: 'rgba(15,15,30,0.5)' }}
                 >
-                  <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0"
+                  <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0"
                          style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.15)' }}>
-                      <HiOutlineChartBar className="w-6 h-6 text-purple-400" />
+                      <HiOutlineChartBar className="w-4 h-4 sm:w-6 sm:h-6 text-purple-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="font-medium text-white group-hover:text-purple-300 transition-colors truncate">
+                      <p className="font-medium text-sm sm:text-base text-white group-hover:text-purple-300 transition-colors truncate">
                         {interview.config?.role || 'Unknown Role'} - {interview.config?.type || 'Unknown'}
                       </p>
-                      <div className="flex items-center gap-3 mt-1 flex-wrap">
+                      <div className="flex items-center gap-2 sm:gap-3 mt-1 flex-wrap">
                         <span className="text-xs text-text-muted">
                           {new Date(interview.createdAt).toLocaleDateString('en-US', {
                             month: 'short', day: 'numeric', year: 'numeric',
@@ -190,10 +190,10 @@ export default function History() {
 
                 <button
                   onClick={(e) => handleDelete(e, interview._id)}
-                  className="p-2 sm:p-3 rounded-xl text-text-muted/40 hover:text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/15 transition-all shrink-0"
+                  className="absolute top-1/2 -translate-y-1/2 right-2 sm:relative sm:top-auto sm:right-auto sm:translate-y-0 p-2 sm:p-3 rounded-xl text-text-muted/40 hover:text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/15 transition-all shrink-0"
                   title="Delete interview"
                 >
-                  <HiOutlineTrash className="w-5 h-5" />
+                  <HiOutlineTrash className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </motion.div>

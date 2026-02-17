@@ -19,6 +19,7 @@ export function useSpeechRecognition() {
 
   const finalTranscriptRef = useRef('');
   const interimRef = useRef('');
+  const accumulatedRef = useRef('');
   const isActiveRef = useRef(false);
   const onInterimRef = useRef(null);
   const onErrorRef = useRef(null);
@@ -111,7 +112,7 @@ export function useSpeechRecognition() {
       }
       interimRef.current = sessionInterim;
 
-      const liveText = ((finalTranscriptRef.current || '') + ' ' + sessionInterim).trim();
+      const liveText = (accumulatedRef.current + ' ' + (finalTranscriptRef.current || '') + ' ' + sessionInterim).trim();
       if (onInterimRef.current && liveText) {
         onInterimRef.current(liveText);
       }
@@ -148,6 +149,10 @@ export function useSpeechRecognition() {
     recognition.onend = () => {
       if (!isActiveRef.current) return;
 
+      accumulatedRef.current = (accumulatedRef.current + ' ' + finalTranscriptRef.current).trim();
+      finalTranscriptRef.current = '';
+      interimRef.current = '';
+
       restartCountRef.current += 1;
 
       if (restartCountRef.current > MAX_RESTART_COUNT) {
@@ -181,6 +186,7 @@ export function useSpeechRecognition() {
 
     finalTranscriptRef.current = '';
     interimRef.current = '';
+    accumulatedRef.current = '';
     isActiveRef.current = true;
     restartCountRef.current = 0;
     onInterimRef.current = onInterim || null;
@@ -224,9 +230,10 @@ export function useSpeechRecognition() {
         resolved = true;
         stopAudioLevel();
         setIsListening(false);
-        const result = ((finalTranscriptRef.current || '') + ' ' + (interimRef.current || '')).trim();
+        const result = (accumulatedRef.current + ' ' + (finalTranscriptRef.current || '') + ' ' + (interimRef.current || '')).trim();
         finalTranscriptRef.current = '';
         interimRef.current = '';
+        accumulatedRef.current = '';
         resolve(result);
       };
 
@@ -275,6 +282,7 @@ export function useSpeechRecognition() {
     setIsListening(false);
     finalTranscriptRef.current = '';
     interimRef.current = '';
+    accumulatedRef.current = '';
   }, [stopAudioLevel]);
 
   return {
