@@ -71,16 +71,14 @@ export default function Leaderboard() {
           <button
             key={rt.id}
             onClick={() => setType(rt.id)}
-            className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-2xl border transition-all text-left ${
+            className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-2xl border transition-all text-left theme-card ${
               type === rt.id
                 ? 'border-accent-purple/30 text-white'
                 : 'border-white/[0.06] text-text-secondary hover:border-white/10'
             }`}
-            style={{
-              background: type === rt.id
-                ? 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05))'
-                : 'rgba(15,15,30,0.5)',
-            }}
+            style={type === rt.id ? {
+              background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05))',
+            } : {}}
           >
             <div
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0"
@@ -119,7 +117,7 @@ export default function Leaderboard() {
           ))}
         </div>
       ) : entries.length === 0 ? (
-        <div className="text-center py-20 rounded-2xl border border-white/[0.06]" style={{ background: 'rgba(15,15,30,0.5)' }}>
+        <div className="text-center py-20 rounded-2xl border border-white/[0.06] theme-card">
           <p className="text-text-muted text-lg mb-2">No data yet</p>
           <p className="text-text-muted text-sm">Complete interviews to appear on the leaderboard!</p>
         </div>
@@ -187,7 +185,7 @@ export default function Leaderboard() {
 
           {/* Remaining list */}
           {rest.length > 0 && (
-            <div className="rounded-2xl border border-white/[0.06] overflow-hidden" style={{ background: 'rgba(15,15,30,0.5)' }}>
+            <div className="rounded-2xl border border-white/[0.06] overflow-hidden theme-card">
               {rest.map((entry, i) => {
                 const isMe = entry.userId?.toString() === user?._id || entry.userId === user?._id;
                 return (

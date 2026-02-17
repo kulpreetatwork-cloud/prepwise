@@ -127,7 +127,7 @@ export default function OnboardingTour({ run, onFinish }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="absolute w-[90vw] max-w-[350px] rounded-2xl p-4 sm:p-5 border border-dark-border"
+          className="absolute w-[90vw] max-w-[350px] rounded-2xl p-4 sm:p-5 border border-dark-border modal-bg"
           style={{
             top: tooltipPos.top,
             left: tooltipPos.left,

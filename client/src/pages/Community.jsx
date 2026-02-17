@@ -220,7 +220,7 @@ export default function Community() {
           ))}
         </div>
       ) : posts.length === 0 ? (
-        <div className="text-center py-20 rounded-2xl border border-white/[0.06]" style={{ background: 'rgba(15,15,30,0.5)' }}>
+        <div className="text-center py-20 rounded-2xl border border-white/[0.06] theme-card">
           <p className="text-text-muted text-lg mb-2">No posts found</p>
           <p className="text-text-muted text-sm">Be the first to start a discussion!</p>
         </div>
@@ -237,8 +237,7 @@ export default function Community() {
                 key={post._id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="rounded-2xl border border-white/[0.06] p-3 sm:p-5 transition-all hover:border-purple-500/15 group"
-                style={{ background: 'rgba(15,15,30,0.5)' }}
+                className="rounded-2xl border border-white/[0.06] p-3 sm:p-5 transition-all hover:border-purple-500/15 group theme-card"
               >
                     <div className="flex gap-3 sm:gap-4">
                   {/* Vote column */}
@@ -355,7 +354,7 @@ export default function Community() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed inset-x-4 top-[10%] sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-full sm:max-w-lg z-50 rounded-2xl p-5 sm:p-6 border border-dark-border max-h-[85vh] overflow-y-auto"
+              className="fixed inset-x-4 top-[10%] sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-full sm:max-w-lg z-50 rounded-2xl p-5 sm:p-6 border border-dark-border max-h-[85vh] overflow-y-auto modal-bg"
               style={{ background: 'linear-gradient(135deg, rgba(19,19,43,0.95) 0%, rgba(17,17,24,0.98) 100%)', backdropFilter: 'blur(24px)' }}
             >
               <div className="flex items-center justify-between mb-5">

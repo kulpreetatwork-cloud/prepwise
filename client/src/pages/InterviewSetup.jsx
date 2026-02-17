@@ -189,8 +189,7 @@ export default function InterviewSetup() {
               <button
                 key={t._id}
                 onClick={() => handleUseTemplate(t)}
-                className="group shrink-0 w-44 sm:w-52 rounded-xl border border-white/[0.06] p-3 sm:p-4 text-left transition-all hover:border-purple-500/20 relative"
-                style={{ background: 'rgba(15,15,30,0.5)' }}
+                className="group shrink-0 w-44 sm:w-52 rounded-xl border border-white/[0.06] p-3 sm:p-4 text-left transition-all hover:border-purple-500/20 relative theme-card"
               >
                 <div className="flex items-start justify-between mb-2">
                   <div
@@ -628,7 +627,7 @@ export default function InterviewSetup() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed inset-x-4 top-[20%] sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-full sm:max-w-md z-50 rounded-2xl p-5 sm:p-6 border border-dark-border max-h-[80vh] overflow-y-auto"
+              className="fixed inset-x-4 top-[20%] sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-full sm:max-w-md z-50 rounded-2xl p-5 sm:p-6 border border-dark-border max-h-[80vh] overflow-y-auto modal-bg"
               style={{ background: 'linear-gradient(135deg, rgba(19,19,43,0.95) 0%, rgba(17,17,24,0.98) 100%)', backdropFilter: 'blur(24px)' }}
             >
               <div className="flex items-center justify-between mb-4">

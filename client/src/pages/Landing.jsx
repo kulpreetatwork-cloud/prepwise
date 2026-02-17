@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HiOutlineLightningBolt, HiOutlineMicrophone, HiOutlineChartBar, HiOutlineAcademicCap, HiOutlineClock, HiOutlineShieldCheck } from 'react-icons/hi';
+import { HiOutlineLightningBolt, HiOutlineMicrophone, HiOutlineChartBar, HiOutlineAcademicCap, HiOutlineClock, HiOutlineShieldCheck, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { useThemeStore } from '../store/themeStore';
 
 const features = [
   { icon: HiOutlineMicrophone, title: 'Real-Time Voice AI', description: 'Experience seamless voice-based interviews powered by cutting-edge AI technology' },
@@ -21,6 +22,8 @@ const fadeUp = {
 };
 
 export default function Landing() {
+  const { theme, toggleTheme } = useThemeStore();
+
   return (
     <div className="min-h-screen bg-dark-primary overflow-hidden">
       {/* Navbar */}
@@ -33,6 +36,13 @@ export default function Landing() {
           <span className="text-xl sm:text-2xl font-bold gradient-text">Prepwise</span>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
+          </button>
           <Link to="/login" className="text-text-secondary hover:text-white transition-colors text-xs sm:text-sm font-medium px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl hover:bg-dark-tertiary/50">
             Sign In
           </Link>

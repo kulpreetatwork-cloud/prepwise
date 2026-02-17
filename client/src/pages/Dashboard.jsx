@@ -155,8 +155,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
-            className="rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-white/[0.06] relative overflow-hidden"
-            style={{ background: 'rgba(15,15,30,0.5)', backdropFilter: 'blur(8px)' }}
+            className="rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-white/[0.06] relative overflow-hidden theme-card"
           >
             <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-20" style={{ background: stat.glow }} />
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-3"
@@ -176,8 +175,7 @@ export default function Dashboard() {
         {stats?.progressData?.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06] theme-card"
           >
             <h3 className="text-base font-semibold text-white mb-4">Score Progress</h3>
             <ResponsiveContainer width="100%" height={240}>
@@ -205,8 +203,7 @@ export default function Dashboard() {
         {radarData && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06] theme-card"
           >
             <h3 className="text-base font-semibold text-white mb-4">Skill Radar</h3>
             <ResponsiveContainer width="100%" height={240}>
@@ -229,8 +226,7 @@ export default function Dashboard() {
         {!stats?.progressData?.length && !radarData && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="rounded-2xl p-12 text-center lg:col-span-2 border border-white/[0.06]"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl p-12 text-center lg:col-span-2 border border-white/[0.06] theme-card"
           >
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
                  style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.15))', border: '1px solid rgba(139,92,246,0.2)' }}>
@@ -253,8 +249,7 @@ export default function Dashboard() {
       {stats?.recentInterviews?.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-          className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
-          style={{ background: 'rgba(15,15,30,0.5)' }}
+          className="rounded-2xl p-4 sm:p-6 border border-white/[0.06] theme-card"
         >
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-base font-semibold text-white">Recent Interviews</h3>
@@ -319,8 +314,7 @@ export default function Dashboard() {
       {stats?.achievements?.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
-          className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
-          style={{ background: 'rgba(15,15,30,0.5)' }}
+          className="rounded-2xl p-4 sm:p-6 border border-white/[0.06] theme-card"
         >
           <h3 className="text-base font-semibold text-white mb-4">Achievements</h3>
           <div className="flex flex-wrap gap-2 sm:gap-3">

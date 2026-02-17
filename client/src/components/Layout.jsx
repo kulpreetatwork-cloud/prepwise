@@ -1,5 +1,6 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { useThemeStore } from '../store/themeStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import OnboardingTour from './OnboardingTour';
@@ -16,6 +17,8 @@ import {
   HiOutlineChartBar,
   HiOutlineChartPie,
   HiOutlineQuestionMarkCircle,
+  HiOutlineSun,
+  HiOutlineMoon,
 } from 'react-icons/hi';
 
 const navItems = [
@@ -31,6 +34,7 @@ const navItems = [
 
 export default function Layout() {
   const { user, logout } = useAuthStore();
+  const { theme, toggleTheme } = useThemeStore();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -103,6 +107,13 @@ export default function Layout() {
           </div>
         </div>
         <button
+          onClick={toggleTheme}
+          className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-text-secondary hover:text-accent-purple hover:bg-accent-purple/10 transition-all duration-200 w-full mb-1"
+        >
+          {theme === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
+          {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+        </button>
+        <button
           onClick={handleLogout}
           className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-text-secondary hover:text-accent-red hover:bg-accent-red/10 transition-all duration-200 w-full"
         >
@@ -116,7 +127,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-dark-primary flex flex-row">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex lg:flex-col w-64 shrink-0 fixed h-full z-30 border-r border-dark-border"
+      <aside className="hidden lg:flex lg:flex-col w-64 shrink-0 fixed h-full z-30 border-r border-dark-border sidebar-bg"
              style={{ background: 'linear-gradient(180deg, #111118 0%, #0D0D14 100%)' }}>
         <SidebarContent />
       </aside>
@@ -138,7 +149,7 @@ export default function Layout() {
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed left-0 top-0 bottom-0 w-64 z-50 flex flex-col lg:hidden border-r border-dark-border"
+              className="fixed left-0 top-0 bottom-0 w-64 z-50 flex flex-col lg:hidden border-r border-dark-border sidebar-bg"
               style={{ background: 'linear-gradient(180deg, #111118 0%, #0D0D14 100%)' }}
             >
               <SidebarContent />
@@ -150,7 +161,7 @@ export default function Layout() {
       {/* Main Content */}
       <main className="flex-1 lg:ml-64 min-h-screen flex flex-col overflow-x-hidden">
         {/* Top Header */}
-        <header className="sticky top-0 z-20 border-b border-dark-border px-5 lg:px-8 py-4 flex items-center justify-between"
+        <header className="sticky top-0 z-20 border-b border-dark-border px-5 lg:px-8 py-4 flex items-center justify-between header-bg"
                 style={{ background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
           <button
             onClick={() => setSidebarOpen(true)}
@@ -160,6 +171,13 @@ export default function Layout() {
           </button>
           <div className="lg:hidden" />
           <div className="flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all"
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
+            </button>
             <button
               onClick={() => setShowTour(true)}
               className="p-2 rounded-lg text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all"

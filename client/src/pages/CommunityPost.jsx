@@ -187,8 +187,7 @@ export default function CommunityPost() {
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-        style={{ background: 'rgba(15,15,30,0.5)' }}
+        className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
       >
         <div className="flex gap-3 sm:gap-4">
           {/* Vote */}
@@ -285,7 +284,7 @@ export default function CommunityPost() {
       </motion.div>
 
       {/* Comment form */}
-      <div className="rounded-2xl border border-white/[0.06] p-4 sm:p-5" style={{ background: 'rgba(15,15,30,0.5)' }}>
+      <div className="rounded-2xl border border-white/[0.06] p-4 sm:p-5 theme-card">
         <h3 className="text-sm font-semibold text-white mb-3">
           {replyTo ? 'Replying to comment' : 'Add a comment'}
           {replyTo && (
@@ -331,7 +330,7 @@ export default function CommunityPost() {
 
             return (
               <div key={comment._id} className="space-y-2">
-                <div className="rounded-xl border border-white/[0.04] p-4" style={{ background: 'rgba(15,15,30,0.3)' }}>
+                <div className="rounded-xl border border-white/[0.04] p-4 theme-card">
                   <div className="flex gap-3">
                     <div className="flex flex-col items-center gap-0.5 shrink-0">
                       <button onClick={() => handleVoteComment(comment._id, 'up')} className={`p-0.5 rounded transition-colors ${hasUp ? 'text-accent-purple' : 'text-text-muted hover:text-accent-purple'}`}>
@@ -373,7 +372,7 @@ export default function CommunityPost() {
                       const rDown = reply.downvotes?.some((i) => (typeof i === 'string' ? i : i?._id || i) === uid);
                       const isReplyAuthor = uid === reply.userId?._id;
                       return (
-                        <div key={reply._id} className="rounded-xl border border-white/[0.03] p-3" style={{ background: 'rgba(15,15,30,0.2)' }}>
+                        <div key={reply._id} className="rounded-xl border border-white/[0.03] p-3 theme-card">
                           <div className="flex gap-3">
                             <div className="flex flex-col items-center gap-0.5 shrink-0">
                               <button onClick={() => handleVoteComment(reply._id, 'up')} className={`p-0.5 rounded transition-colors ${rUp ? 'text-accent-purple' : 'text-text-muted hover:text-accent-purple'}`}>

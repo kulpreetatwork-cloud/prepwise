@@ -30,7 +30,7 @@ function HeatmapTooltip({ date, count }) {
   if (!date) return null;
   const d = new Date(date);
   return (
-    <div className="px-3 py-1.5 rounded-lg text-xs" style={{ background: '#1A1A2E', border: '1px solid rgba(139,92,246,0.2)' }}>
+    <div className="px-3 py-1.5 rounded-lg text-xs heatmap-tooltip" style={{ background: '#1A1A2E', border: '1px solid rgba(139,92,246,0.2)' }}>
       <span className="text-text-secondary font-medium">
         {count} {count === 1 ? 'interview' : 'interviews'}
       </span>
@@ -82,7 +82,7 @@ function ContributionHeatmap({ data }) {
   const activeDays = data.filter((d) => d.count > 0).length;
 
   return (
-    <div className="rounded-2xl border border-white/[0.06] p-4 sm:p-6" style={{ background: 'rgba(15,15,30,0.5)' }}>
+    <div className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0 mb-4">
         <h3 className="text-base font-semibold text-white">Interview Activity</h3>
         <div className="flex items-center gap-4 text-xs text-text-muted">
@@ -216,8 +216,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="rounded-2xl p-3 sm:p-4 border border-white/[0.06] relative overflow-hidden"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl p-3 sm:p-4 border border-white/[0.06] relative overflow-hidden theme-card"
           >
             <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2" style={{ background: card.gradient }}>
               <card.icon className="w-4 h-4 text-white" />
@@ -237,8 +236,7 @@ export default function Analytics() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-          style={{ background: 'rgba(15,15,30,0.5)' }}
+          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
         >
           <h3 className="text-base font-semibold text-white mb-4">Score Trend</h3>
           <ResponsiveContainer width="100%" height={200}>
@@ -259,8 +257,7 @@ export default function Analytics() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-          style={{ background: 'rgba(15,15,30,0.5)' }}
+          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
         >
           <h3 className="text-base font-semibold text-white mb-4">Category Performance</h3>
           <ResponsiveContainer width="100%" height={200}>
@@ -287,8 +284,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
           >
             <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Interview Type</h3>
             <ResponsiveContainer width="100%" height={180}>
@@ -309,8 +305,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
-            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
           >
             <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Difficulty</h3>
             <ResponsiveContainer width="100%" height={180}>
@@ -331,8 +326,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
           >
             <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Role</h3>
             <ResponsiveContainer width="100%" height={Math.max(150, performanceByRole.length * 35)}>
@@ -353,8 +347,7 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
-            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-            style={{ background: 'rgba(15,15,30,0.5)' }}
+            className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
           >
             <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Duration</h3>
             <ResponsiveContainer width="100%" height={180}>
@@ -376,8 +369,7 @@ export default function Analytics() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
-          style={{ background: 'rgba(15,15,30,0.5)' }}
+          className="rounded-2xl border border-white/[0.06] p-4 sm:p-6 theme-card"
         >
           <h3 className="text-base font-semibold text-white mb-4">Best Time of Day</h3>
           <div className="flex items-end gap-0.5 sm:gap-1 h-24 sm:h-32">

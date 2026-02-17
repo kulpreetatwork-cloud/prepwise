@@ -62,6 +62,142 @@
   }
 }
 
+/* ─── Light Theme Overrides ─── */
+[data-theme="light"] {
+  --color-dark-primary: #F8FAFC;
+  --color-dark-secondary: #F1F5F9;
+  --color-dark-tertiary: #E2E8F0;
+  --color-dark-card: #FFFFFF;
+  --color-dark-border: #CBD5E1;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+}
+
+[data-theme="light"] body {
+  background-color: var(--color-dark-primary);
+  color: var(--color-text-primary);
+}
+
+/* Scrollbar */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #E2E8F0; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #CBD5E1; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #8B5CF6; }
+
+/* Select options */
+[data-theme="light"] select option {
+  background-color: #FFFFFF;
+  color: #0F172A;
+}
+
+/* Glass cards */
+[data-theme="light"] .glass-card,
+[data-theme="light"] .glass-card-hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(241,245,249,0.96) 100%) !important;
+  border-color: rgba(203,213,225,0.5) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 0 rgba(255,255,255,0.8) inset !important;
+}
+[data-theme="light"] .glass-card-hover:hover {
+  border-color: rgba(139,92,246,0.3) !important;
+  box-shadow: 0 8px 32px rgba(139,92,246,0.08), 0 1px 0 rgba(255,255,255,0.8) inset !important;
+}
+
+/* Input fields */
+[data-theme="light"] .input-field {
+  background-color: #FFFFFF;
+  border-color: #CBD5E1;
+  color: #0F172A;
+}
+[data-theme="light"] .input-field::placeholder { color: #94A3B8; }
+[data-theme="light"] .input-field:focus {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 3px rgba(139,92,246,0.1);
+}
+
+/* ─── text-white → dark in light mode ─── */
+[data-theme="light"] .text-white {
+  color: #0F172A !important;
+}
+
+/* Keep white text on ALL gradient backgrounds (inline style) */
+[data-theme="light"] [style*="gradient"] .text-white,
+[data-theme="light"] [style*="gradient"].text-white {
+  color: white !important;
+}
+
+/* Keep white on btn-primary */
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .btn-primary * {
+  color: white !important;
+}
+
+/* Keep white on Tailwind gradient backgrounds */
+[data-theme="light"] .bg-gradient-to-r,
+[data-theme="light"] .bg-gradient-to-br,
+[data-theme="light"] .bg-gradient-to-r *,
+[data-theme="light"] .bg-gradient-to-br * {
+  color: white !important;
+}
+
+/* Keep gradient-text working */
+[data-theme="light"] .gradient-text {
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ─── theme-card: the universal card background ─── */
+[data-theme="light"] .theme-card {
+  background: rgba(255,255,255,0.85) !important;
+  border-color: rgba(203,213,225,0.4) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+}
+
+/* ─── Sidebar & header light overrides ─── */
+[data-theme="light"] .sidebar-bg {
+  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%) !important;
+}
+[data-theme="light"] .header-bg {
+  background: rgba(248,250,252,0.85) !important;
+}
+
+/* ─── Modal backdrop light override ─── */
+[data-theme="light"] .modal-bg {
+  background: linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(241,245,249,0.99) 100%) !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* ─── Recharts tooltip light override ─── */
+[data-theme="light"] .recharts-default-tooltip {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+/* ─── Auth page or-continue text bg fix ─── */
+[data-theme="light"] .bg-dark-primary.text-text-muted {
+  background-color: var(--color-dark-primary);
+}
+
+/* ─── Heatmap tooltip ─── */
+[data-theme="light"] .heatmap-tooltip {
+  background: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* ─── Amber alert banner in light mode ─── */
+[data-theme="light"] .bg-amber-500\/10 {
+  background-color: rgba(245,158,11,0.06);
+}
+[data-theme="light"] .border-amber-500\/20 {
+  border-color: rgba(245,158,11,0.15);
+}
+[data-theme="light"] .text-amber-400 { color: #D97706 !important; }
+[data-theme="light"] .text-amber-300\/90 { color: #92400E !important; }
+
+@utility theme-card {
+  background: rgba(15, 15, 30, 0.5);
+  backdrop-filter: blur(8px);
+}
+
 @utility glass-card {
   background: linear-gradient(135deg, rgba(19, 19, 43, 0.8) 0%, rgba(17, 17, 24, 0.9) 100%);
   backdrop-filter: blur(24px);

@@ -119,7 +119,7 @@ export default function History() {
           ))}
         </div>
       ) : interviews.length === 0 ? (
-        <div className="rounded-2xl p-8 sm:p-12 text-center border border-white/[0.06]" style={{ background: 'rgba(15,15,30,0.5)' }}>
+        <div className="rounded-2xl p-8 sm:p-12 text-center border border-white/[0.06] theme-card">
           <HiOutlineClock className="w-12 h-12 text-text-muted mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">No interviews found</h3>
           <p className="text-text-secondary mb-6">Start practicing to see your history here</p>
@@ -143,10 +143,9 @@ export default function History() {
               <div className="relative sm:flex sm:items-center sm:gap-2">
                 <Link
                   to={interview.feedback ? `/interview/feedback/${interview._id}` : '#'}
-                  className={`block sm:flex-1 flex items-center justify-between p-3 pr-10 sm:p-5 sm:pr-5 rounded-2xl border border-white/[0.06] hover:border-purple-500/15 transition-all group ${
+                  className={`block sm:flex-1 flex items-center justify-between p-3 pr-10 sm:p-5 sm:pr-5 rounded-2xl border border-white/[0.06] hover:border-purple-500/15 transition-all group theme-card ${
                     !interview.feedback ? 'opacity-50' : ''
                   }`}
-                  style={{ background: 'rgba(15,15,30,0.5)' }}
                 >
                   <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
                     <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0"

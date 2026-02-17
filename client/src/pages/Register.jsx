@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import toast from 'react-hot-toast';
-import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail, HiOutlineLockClosed, HiOutlineUser } from 'react-icons/hi';
+import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail, HiOutlineLockClosed, HiOutlineUser, HiOutlineInformationCircle, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { useThemeStore } from '../store/themeStore';
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -15,6 +16,7 @@ function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register, googleAuth } = useAuthStore();
+  const { theme, toggleTheme } = useThemeStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -51,7 +53,16 @@ function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-primary flex flex-row">
+    <div className="min-h-screen bg-dark-primary flex flex-row relative">
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleTheme}
+        className="absolute top-5 right-5 z-30 p-2.5 rounded-xl text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-all border border-dark-border bg-dark-secondary/80 backdrop-blur-sm"
+        title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {theme === 'dark' ? <HiOutlineSun className="w-5 h-5" /> : <HiOutlineMoon className="w-5 h-5" />}
+      </button>
+
       {/* Left Panel */}
       <div className="hidden lg:flex w-1/2 relative overflow-hidden items-center justify-center p-16"
            style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(59,130,246,0.08) 100%)' }}>
@@ -86,7 +97,14 @@ function RegisterForm() {
           </Link>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Create account</h1>
-          <p className="text-text-secondary text-base mb-10">Get started with your free account</p>
+          <p className="text-text-secondary text-base mb-8">Get started with your free account</p>
+
+          <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-8">
+            <HiOutlineInformationCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <p className="text-xs text-amber-300/90 leading-relaxed">
+              First request may take up to 50 seconds as our server wakes up (free tier). Subsequent requests are instant.
+            </p>
+          </div>
 
           {GOOGLE_CLIENT_ID && (
             <>

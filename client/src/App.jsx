@@ -52,6 +52,11 @@ export default function App() {
     checkAuth();
   }, [checkAuth]);
 
+  useEffect(() => {
+    const saved = localStorage.getItem('prepwise_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+  }, []);
+
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
