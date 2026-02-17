@@ -8,7 +8,7 @@ const IS_MOBILE = typeof navigator !== 'undefined' &&
   (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1);
 
 const MAX_RESTART_COUNT = 15;
-const RESTART_DELAY = IS_MOBILE ? 300 : 200;
+const RESTART_DELAY = 200;
 
 export function useSpeechRecognition() {
   const recognitionRef = useRef(null);
@@ -17,9 +17,9 @@ export function useSpeechRecognition() {
   const analyserRef = useRef(null);
   const animationRef = useRef(null);
 
-  const finalTranscriptRef = useRef('');
-  const interimRef = useRef('');
-  const accumulatedRef = useRef('');
+  const sessionTextRef = useRef('');
+  const committedTextRef = useRef('');
+  const sessionIdRef = useRef(0);
   const isActiveRef = useRef(false);
   const onInterimRef = useRef(null);
   const onErrorRef = useRef(null);
@@ -90,31 +90,24 @@ export function useSpeechRecognition() {
     recognition.lang = 'en-US';
     recognition.maxAlternatives = 1;
 
+    const mySession = sessionIdRef.current;
+
     recognition.onaudiostart = () => {
       restartCountRef.current = 0;
     };
 
     recognition.onresult = (event) => {
-      let sessionFinal = '';
-      let sessionInterim = '';
+      if (mySession !== sessionIdRef.current) return;
 
+      let text = '';
       for (let i = 0; i < event.results.length; i++) {
-        const result = event.results[i];
-        if (result.isFinal) {
-          sessionFinal += result[0].transcript;
-        } else {
-          sessionInterim += result[0].transcript;
-        }
+        text += event.results[i][0].transcript;
       }
+      sessionTextRef.current = text;
 
-      if (sessionFinal) {
-        finalTranscriptRef.current = sessionFinal;
-      }
-      interimRef.current = sessionInterim;
-
-      const liveText = (accumulatedRef.current + ' ' + (finalTranscriptRef.current || '') + ' ' + sessionInterim).trim();
-      if (onInterimRef.current && liveText) {
-        onInterimRef.current(liveText);
+      const display = (committedTextRef.current + ' ' + text).trim();
+      if (onInterimRef.current && display) {
+        onInterimRef.current(display);
       }
     };
 
@@ -147,11 +140,17 @@ export function useSpeechRecognition() {
     };
 
     recognition.onend = () => {
+      recognition.onresult = null;
+
       if (!isActiveRef.current) return;
 
-      accumulatedRef.current = (accumulatedRef.current + ' ' + finalTranscriptRef.current).trim();
-      finalTranscriptRef.current = '';
-      interimRef.current = '';
+      committedTextRef.current = (committedTextRef.current + ' ' + sessionTextRef.current).trim();
+      sessionTextRef.current = '';
+      sessionIdRef.current += 1;
+
+      if (IS_MOBILE) {
+        return;
+      }
 
       restartCountRef.current += 1;
 
@@ -184,9 +183,9 @@ export function useSpeechRecognition() {
   const startListening = useCallback(async (onInterim, onError) => {
     if (!SpeechRecognitionAPI) throw new Error('SpeechRecognition not supported');
 
-    finalTranscriptRef.current = '';
-    interimRef.current = '';
-    accumulatedRef.current = '';
+    sessionTextRef.current = '';
+    committedTextRef.current = '';
+    sessionIdRef.current = 0;
     isActiveRef.current = true;
     restartCountRef.current = 0;
     onInterimRef.current = onInterim || null;
@@ -230,10 +229,9 @@ export function useSpeechRecognition() {
         resolved = true;
         stopAudioLevel();
         setIsListening(false);
-        const result = (accumulatedRef.current + ' ' + (finalTranscriptRef.current || '') + ' ' + (interimRef.current || '')).trim();
-        finalTranscriptRef.current = '';
-        interimRef.current = '';
-        accumulatedRef.current = '';
+        const result = (committedTextRef.current + ' ' + sessionTextRef.current).trim();
+        sessionTextRef.current = '';
+        committedTextRef.current = '';
         resolve(result);
       };
 
@@ -280,9 +278,8 @@ export function useSpeechRecognition() {
     }
     stopAudioLevel();
     setIsListening(false);
-    finalTranscriptRef.current = '';
-    interimRef.current = '';
-    accumulatedRef.current = '';
+    sessionTextRef.current = '';
+    committedTextRef.current = '';
   }, [stopAudioLevel]);
 
   return {
