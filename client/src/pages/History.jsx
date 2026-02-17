@@ -87,14 +87,14 @@ export default function History() {
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Interview History</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Interview History</h1>
           <p className="text-text-secondary mt-1">{pagination.total} {pagination.total === 1 ? 'interview' : 'interviews'} total</p>
         </div>
         <div className="flex items-center gap-3">
           {pagination.total > 0 && (
             <button
               onClick={handleDeleteAll}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-red-400/70 hover:text-red-400 border border-red-500/10 hover:border-red-500/20 hover:bg-red-500/5 transition-all"
+              className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm text-red-400/70 hover:text-red-400 border border-red-500/10 hover:border-red-500/20 hover:bg-red-500/5 transition-all"
             >
               <HiOutlineTrash className="w-4 h-4" />
               Clear All
@@ -103,7 +103,7 @@ export default function History() {
           <select
             value={filters.status}
             onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-            className="px-4 py-2.5 bg-dark-secondary border border-dark-border rounded-xl text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all"
+            className="px-3 py-2 sm:px-4 sm:py-2.5 bg-dark-secondary border border-dark-border rounded-xl text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all"
           >
             <option value="">All Status</option>
             <option value="completed">Completed</option>
@@ -119,7 +119,7 @@ export default function History() {
           ))}
         </div>
       ) : interviews.length === 0 ? (
-        <div className="rounded-2xl p-12 text-center border border-white/[0.06]" style={{ background: 'rgba(15,15,30,0.5)' }}>
+        <div className="rounded-2xl p-8 sm:p-12 text-center border border-white/[0.06]" style={{ background: 'rgba(15,15,30,0.5)' }}>
           <HiOutlineClock className="w-12 h-12 text-text-muted mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">No interviews found</h3>
           <p className="text-text-secondary mb-6">Start practicing to see your history here</p>
@@ -140,7 +140,7 @@ export default function History() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.04 }}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <Link
                   to={interview.feedback ? `/interview/feedback/${interview._id}` : '#'}
                   className={`flex-1 flex items-center justify-between p-3 sm:p-5 rounded-2xl border border-white/[0.06] hover:border-purple-500/15 transition-all group ${
@@ -177,7 +177,7 @@ export default function History() {
                   </div>
 
                   {interview.feedback && (
-                    <div className="text-right shrink-0 ml-4">
+                    <div className="text-right shrink-0 ml-2 sm:ml-4">
                       <p className={`text-xl sm:text-2xl font-bold ${getScoreColor(interview.feedback.overallScore)}`}>
                         {interview.feedback.overallScore}
                       </p>
@@ -190,7 +190,7 @@ export default function History() {
 
                 <button
                   onClick={(e) => handleDelete(e, interview._id)}
-                  className="p-3 rounded-xl text-text-muted/40 hover:text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/15 transition-all shrink-0"
+                  className="p-2 sm:p-3 rounded-xl text-text-muted/40 hover:text-red-400 hover:bg-red-500/10 border border-transparent hover:border-red-500/15 transition-all shrink-0"
                   title="Delete interview"
                 >
                   <HiOutlineTrash className="w-5 h-5" />

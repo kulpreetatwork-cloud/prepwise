@@ -7,8 +7,8 @@ const SpeechRecognitionAPI = typeof window !== 'undefined'
 const IS_MOBILE = typeof navigator !== 'undefined' &&
   (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1);
 
-const MAX_RESTART_COUNT = IS_MOBILE ? 10 : 15;
-const RESTART_DELAY = IS_MOBILE ? 400 : 200;
+const MAX_RESTART_COUNT = 15;
+const RESTART_DELAY = IS_MOBILE ? 300 : 200;
 
 export function useSpeechRecognition() {
   const recognitionRef = useRef(null);
@@ -84,7 +84,7 @@ export function useSpeechRecognition() {
 
   const spawnRecognition = useCallback(() => {
     const recognition = new SpeechRecognitionAPI();
-    recognition.continuous = !IS_MOBILE;
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
     recognition.maxAlternatives = 1;
@@ -202,7 +202,9 @@ export function useSpeechRecognition() {
       throw e;
     }
 
-    await startAudioLevelMonitor();
+    if (!IS_MOBILE) {
+      await startAudioLevelMonitor();
+    }
   }, [spawnRecognition, startAudioLevelMonitor]);
 
   const stopListening = useCallback(() => {
