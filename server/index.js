@@ -13,6 +13,7 @@ import questionRoutes from './src/routes/questionRoutes.js';
 import communityRoutes from './src/routes/communityRoutes.js';
 import leaderboardRoutes from './src/routes/leaderboardRoutes.js';
 import templateRoutes from './src/routes/templateRoutes.js';
+import sttRoutes from './src/routes/sttRoutes.js';
 import { setupInterviewSocket } from './src/sockets/interviewSocket.js';
 
 dotenv.config();
@@ -53,6 +54,7 @@ app.use('/api/questions', questionRoutes);
 app.use('/api/community', communityRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/templates', templateRoutes);
+app.use('/api/stt', sttRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
