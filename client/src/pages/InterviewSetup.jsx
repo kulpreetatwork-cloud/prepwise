@@ -166,10 +166,10 @@ export default function InterviewSetup() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-2">Setup Your Interview</h1>
-          <p className="text-text-secondary">Configure your mock interview experience</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">Setup Your Interview</h1>
+          <p className="text-text-secondary text-sm">Configure your mock interview experience</p>
         </div>
         <button
           onClick={() => setShowSaveTemplate(true)}
@@ -247,28 +247,28 @@ export default function InterviewSetup() {
       <AnimatePresence mode="wait">
         {step === 0 && (
           <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
                 <HiOutlineBriefcase className="w-5 h-5 text-accent-purple" />
                 Select Target Role
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {ROLES.map((role) => (
                   <button
                     key={role.id}
                     onClick={() => handleRoleSelect(role.id)}
-                    className={`p-4 rounded-xl border text-left transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl border text-left transition-all ${
                       config.role === role.label
                         ? 'border-accent-purple bg-accent-purple/10 shadow-lg shadow-accent-purple/10'
                         : 'border-dark-border bg-dark-secondary hover:border-accent-purple/50'
                     }`}
                   >
-                    <span className="text-2xl mb-2 block">{role.icon}</span>
-                    <span className="text-sm font-medium text-white">{role.label}</span>
+                    <span className="text-xl sm:text-2xl mb-1 sm:mb-2 block">{role.icon}</span>
+                    <span className="text-xs sm:text-sm font-medium text-white">{role.label}</span>
                   </button>
                 ))}
-                <div className="p-4 rounded-xl border border-dark-border bg-dark-secondary">
-                  <span className="text-2xl mb-2 block">+</span>
+                <div className="p-3 sm:p-4 rounded-xl border border-dark-border bg-dark-secondary">
+                  <span className="text-xl sm:text-2xl mb-1 sm:mb-2 block">+</span>
                   <input
                     type="text"
                     value={customRole}
@@ -284,9 +284,9 @@ export default function InterviewSetup() {
         )}
 
         {step === 1 && (
-          <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Interview Type</h3>
+          <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 sm:space-y-6">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Interview Type</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {INTERVIEW_TYPES.map((t) => (
                   <button
@@ -305,9 +305,9 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="glass-card rounded-2xl p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">Difficulty</h3>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="glass-card rounded-2xl p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Difficulty</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {DIFFICULTY_LEVELS.map((d) => (
                     <button
@@ -325,8 +325,8 @@ export default function InterviewSetup() {
                 </div>
               </div>
 
-              <div className="glass-card rounded-2xl p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">Experience Level</h3>
+              <div className="glass-card rounded-2xl p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Experience Level</h3>
                 <div className="grid grid-cols-2 gap-3">
                   {EXPERIENCE_LEVELS.map((e) => (
                     <button
@@ -346,8 +346,8 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Duration</h3>
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Duration</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {DURATIONS.map((d) => (
                   <button
@@ -366,9 +366,9 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="glass-card rounded-2xl p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">Interview Style</h3>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="glass-card rounded-2xl p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Interview Style</h3>
                 <div className="space-y-2">
                   {INTERVIEW_STYLES.map((s) => (
                     <button
@@ -387,8 +387,8 @@ export default function InterviewSetup() {
                 </div>
               </div>
 
-              <div className="glass-card rounded-2xl p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">Company Style</h3>
+              <div className="glass-card rounded-2xl p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Company Style</h3>
                 <div className="space-y-2">
                   {COMPANY_STYLES.map((c) => (
                     <button
@@ -408,15 +408,15 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-2">Focus Areas</h3>
-              <p className="text-text-muted text-sm mb-4">Select up to 5 topics to focus on</p>
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">Focus Areas</h3>
+              <p className="text-text-muted text-xs sm:text-sm mb-3 sm:mb-4">Select up to 5 topics to focus on</p>
               <div className="flex flex-wrap gap-2">
                 {availableFocusAreas.map((area) => (
                   <button
                     key={area}
                     onClick={() => handleFocusToggle(area)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                       config.focusAreas?.includes(area)
                         ? 'bg-accent-purple/20 text-accent-purple border border-accent-purple/30'
                         : 'bg-dark-secondary text-text-secondary border border-dark-border hover:border-accent-purple/30'
@@ -428,8 +428,8 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Mode</h3>
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Mode</h3>
               <div className="grid sm:grid-cols-2 gap-3">
                 <button
                   onClick={() => setConfig({ mode: 'practice' })}
@@ -461,9 +461,9 @@ export default function InterviewSetup() {
         )}
 
         {step === 2 && (
-          <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+          <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 sm:space-y-6">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 flex items-center gap-2">
                 <HiOutlineDocumentText className="w-5 h-5 text-accent-purple" />
                 Resume Text (Optional)
               </h3>
@@ -477,8 +477,8 @@ export default function InterviewSetup() {
               />
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 flex items-center gap-2">
                 <HiOutlineBriefcase className="w-5 h-5 text-accent-purple" />
                 Job Description (Optional)
               </h3>
@@ -495,10 +495,10 @@ export default function InterviewSetup() {
         )}
 
         {step === 3 && (
-          <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Interview Summary</h3>
-              <div className="grid sm:grid-cols-2 gap-4">
+          <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 sm:space-y-6">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Interview Summary</h3>
+              <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
                   { label: 'Role', value: config.role },
                   { label: 'Type', value: config.type },
@@ -529,8 +529,8 @@ export default function InterviewSetup() {
               )}
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
                 <HiOutlineMicrophone className="w-5 h-5 text-accent-purple" />
                 Microphone Test
               </h3>
@@ -557,8 +557,8 @@ export default function InterviewSetup() {
               </div>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 bg-gradient-to-r from-accent-purple/5 to-accent-blue/5 border-accent-purple/20">
-              <h3 className="text-lg font-semibold text-white mb-3">Quick Tips</h3>
+            <div className="glass-card rounded-2xl p-4 sm:p-6 bg-gradient-to-r from-accent-purple/5 to-accent-blue/5 border-accent-purple/20">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3">Quick Tips</h3>
               <ul className="space-y-2 text-sm text-text-secondary">
                 <li className="flex items-start gap-2">
                   <span className="text-accent-purple mt-0.5">&#8226;</span>

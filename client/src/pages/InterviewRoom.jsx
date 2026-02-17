@@ -14,30 +14,69 @@ import {
 
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
 
-function speakBrowser(text) {
+const IS_MOBILE = typeof navigator !== 'undefined' &&
+  (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1);
+
+function ensureVoicesLoaded() {
   return new Promise((resolve) => {
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) { resolve(voices); return; }
+    const onVoicesChanged = () => {
+      window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+      resolve(window.speechSynthesis.getVoices());
+    };
+    window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged);
+    setTimeout(() => resolve(window.speechSynthesis.getVoices()), 1000);
+  });
+}
+
+function speakBrowser(text) {
+  return new Promise(async (resolve) => {
     if (!text || !window.speechSynthesis) { resolve(); return; }
     window.speechSynthesis.cancel();
+
+    await ensureVoicesLoaded();
+
+    if (IS_MOBILE) {
+      await new Promise((r) => setTimeout(r, 150));
+    }
+
     const utt = new SpeechSynthesisUtterance(text);
-    utt.rate = 0.92;
+    utt.rate = IS_MOBILE ? 0.95 : 0.92;
     utt.pitch = 1.0;
 
     let resolved = false;
-    const done = () => { if (resolved) return; resolved = true; clearInterval(keepAlive); resolve(); };
+    let keepAlive = null;
+    const done = () => {
+      if (resolved) return;
+      resolved = true;
+      if (keepAlive) clearInterval(keepAlive);
+      resolve();
+    };
 
-    // Chrome TTS keepalive — prevents Chrome from silently killing long utterances
-    const keepAlive = setInterval(() => {
-      if (!window.speechSynthesis.speaking) { done(); return; }
-      window.speechSynthesis.pause();
-      window.speechSynthesis.resume();
-    }, 5000);
+    if (!IS_MOBILE) {
+      keepAlive = setInterval(() => {
+        if (!window.speechSynthesis.speaking) { done(); return; }
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+      }, 5000);
+    }
 
     utt.onend = done;
     utt.onerror = done;
     window.speechSynthesis.speak(utt);
 
-    // Safety timeout — max 30s per utterance to prevent infinite hangs
-    setTimeout(done, 30000);
+    if (IS_MOBILE) {
+      const mobileCheck = setInterval(() => {
+        if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+          clearInterval(mobileCheck);
+          setTimeout(done, 300);
+        }
+      }, 500);
+      setTimeout(() => { clearInterval(mobileCheck); done(); }, 45000);
+    } else {
+      setTimeout(done, 30000);
+    }
   });
 }
 
@@ -474,7 +513,7 @@ export default function InterviewRoom() {
         {/* Right/Bottom: Transcript panel */}
         {showTranscript && (
           <div
-            className="lg:w-[360px] w-full h-56 lg:h-auto border-t lg:border-t-0 lg:border-l border-white/[0.06] flex flex-col shrink-0"
+            className="lg:w-[360px] w-full h-40 sm:h-56 lg:h-auto border-t lg:border-t-0 lg:border-l border-white/[0.06] flex flex-col shrink-0"
             style={{ background: 'rgba(10,10,20,0.6)' }}
           >
             <div className="px-4 py-2.5 border-b border-white/[0.06] flex items-center justify-between shrink-0">

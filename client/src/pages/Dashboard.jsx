@@ -130,9 +130,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-6 sm:space-y-8 max-w-7xl mx-auto">
       {/* Welcome section */}
-      <div className="relative rounded-2xl overflow-hidden p-6 lg:p-8"
+      <div className="relative rounded-2xl overflow-hidden p-4 sm:p-6 lg:p-8"
            style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(99,102,241,0.04) 50%, rgba(59,130,246,0.08) 100%)', border: '1px solid rgba(139,92,246,0.1)' }}>
         <div className="absolute top-0 right-0 w-64 h-64 opacity-30" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)' }} />
         <div className="relative z-10">
@@ -148,35 +148,35 @@ export default function Dashboard() {
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {statCards.map((stat, index) => (
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
-            className="rounded-2xl p-5 lg:p-6 border border-white/[0.06] relative overflow-hidden"
+            className="rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-white/[0.06] relative overflow-hidden"
             style={{ background: 'rgba(15,15,30,0.5)', backdropFilter: 'blur(8px)' }}
           >
             <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-20" style={{ background: stat.glow }} />
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center mb-2 sm:mb-3"
                  style={{ background: stat.gradient }}>
-              <stat.icon className="w-5 h-5 text-white" />
+              <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight">
+            <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-white leading-tight truncate">
               {stat.raw ? stat.value : `${stat.value}${stat.suffix || ''}`}
             </p>
-            <p className="text-text-muted text-xs mt-1.5 uppercase tracking-wider font-medium">{stat.label}</p>
+            <p className="text-text-muted text-[10px] sm:text-xs mt-1 sm:mt-1.5 uppercase tracking-wider font-medium">{stat.label}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Charts */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
         {stats?.progressData?.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="rounded-2xl p-6 border border-white/[0.06]"
+            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
             <h3 className="text-base font-semibold text-white mb-4">Score Progress</h3>
@@ -205,7 +205,7 @@ export default function Dashboard() {
         {radarData && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-            className="rounded-2xl p-6 border border-white/[0.06]"
+            className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
             <h3 className="text-base font-semibold text-white mb-4">Skill Radar</h3>
@@ -319,18 +319,18 @@ export default function Dashboard() {
       {stats?.achievements?.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
-          className="rounded-2xl p-6 border border-white/[0.06]"
+          className="rounded-2xl p-4 sm:p-6 border border-white/[0.06]"
           style={{ background: 'rgba(15,15,30,0.5)' }}
         >
           <h3 className="text-base font-semibold text-white mb-4">Achievements</h3>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {stats.achievements.map((achievement) => {
               const info = ACHIEVEMENT_INFO[achievement.achievementType];
               if (!info) return null;
               return (
                 <div
                   key={achievement._id}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all hover:border-purple-500/30"
+                  className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border transition-all hover:border-purple-500/30"
                   style={{ background: 'rgba(139,92,246,0.06)', borderColor: 'rgba(139,92,246,0.15)' }}
                   title={info.description}
                 >

@@ -204,7 +204,7 @@ export default function Analytics() {
     <div className="space-y-6 max-w-6xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl lg:text-3xl font-bold text-white">Analytics</h1>
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Analytics</h1>
         <p className="text-text-secondary text-sm mt-1">Deep insights into your interview performance</p>
       </div>
 
@@ -222,7 +222,7 @@ export default function Analytics() {
             <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2" style={{ background: card.gradient }}>
               <card.icon className="w-4 h-4 text-white" />
             </div>
-            <p className="text-lg font-bold text-white truncate">{card.value}</p>
+            <p className="text-sm sm:text-lg font-bold text-white truncate">{card.value}</p>
             <p className="text-[10px] text-text-muted uppercase tracking-wider mt-0.5">{card.label}</p>
           </motion.div>
         ))}
@@ -280,7 +280,7 @@ export default function Analytics() {
       )}
 
       {/* Breakdowns grid */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
         {/* By type */}
         {performanceByType?.length > 0 && (
           <motion.div
@@ -290,12 +290,12 @@ export default function Analytics() {
             className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
-            <h3 className="text-base font-semibold text-white mb-4">By Interview Type</h3>
+            <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Interview Type</h3>
             <ResponsiveContainer width="100%" height={180}>
-              <BarChart data={performanceByType} layout="vertical" margin={{ left: 10 }}>
+              <BarChart data={performanceByType} layout="vertical" margin={{ left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                <XAxis type="number" stroke="#64748B" fontSize={10} domain={[0, 100]} />
-                <YAxis dataKey="type" type="category" stroke="#64748B" fontSize={10} width={80} />
+                <XAxis type="number" stroke="#64748B" fontSize={9} domain={[0, 100]} />
+                <YAxis dataKey="type" type="category" stroke="#64748B" fontSize={9} width={65} />
                 <Tooltip contentStyle={chartTooltipStyle} />
                 <Bar dataKey="avgScore" fill="#8B5CF6" radius={[0, 6, 6, 0]} barSize={16} name="Avg Score" />
               </BarChart>
@@ -312,9 +312,9 @@ export default function Analytics() {
             className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
-            <h3 className="text-base font-semibold text-white mb-4">By Difficulty</h3>
+            <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Difficulty</h3>
             <ResponsiveContainer width="100%" height={180}>
-              <BarChart data={performanceByDifficulty} layout="vertical" margin={{ left: 10 }}>
+              <BarChart data={performanceByDifficulty} layout="vertical" margin={{ left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                 <XAxis type="number" stroke="#64748B" fontSize={10} domain={[0, 100]} />
                 <YAxis dataKey="difficulty" type="category" stroke="#64748B" fontSize={10} width={60} />
@@ -334,12 +334,12 @@ export default function Analytics() {
             className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
-            <h3 className="text-base font-semibold text-white mb-4">By Role</h3>
+            <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Role</h3>
             <ResponsiveContainer width="100%" height={Math.max(150, performanceByRole.length * 35)}>
-              <BarChart data={performanceByRole} layout="vertical" margin={{ left: 10 }}>
+              <BarChart data={performanceByRole} layout="vertical" margin={{ left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-                <XAxis type="number" stroke="#64748B" fontSize={10} domain={[0, 100]} />
-                <YAxis dataKey="role" type="category" stroke="#64748B" fontSize={10} width={80} />
+                <XAxis type="number" stroke="#64748B" fontSize={9} domain={[0, 100]} />
+                <YAxis dataKey="role" type="category" stroke="#64748B" fontSize={9} width={65} />
                 <Tooltip contentStyle={chartTooltipStyle} />
                 <Bar dataKey="avgScore" fill="#10B981" radius={[0, 6, 6, 0]} barSize={16} name="Avg Score" />
               </BarChart>
@@ -356,7 +356,7 @@ export default function Analytics() {
             className="rounded-2xl border border-white/[0.06] p-4 sm:p-6"
             style={{ background: 'rgba(15,15,30,0.5)' }}
           >
-            <h3 className="text-base font-semibold text-white mb-4">By Duration</h3>
+            <h3 className="text-sm sm:text-base font-semibold text-white mb-4">By Duration</h3>
             <ResponsiveContainer width="100%" height={180}>
               <BarChart data={performanceByDuration}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />

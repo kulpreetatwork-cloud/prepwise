@@ -24,19 +24,19 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-dark-primary overflow-hidden">
       {/* Navbar */}
-      <nav className="relative z-20 flex items-center justify-between px-6 lg:px-20 py-6">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg"
+      <nav className="relative z-20 flex items-center justify-between px-4 sm:px-6 lg:px-20 py-4 sm:py-6 gap-2">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-white font-bold text-base sm:text-lg shadow-lg"
                style={{ background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)' }}>
             P
           </div>
-          <span className="text-2xl font-bold gradient-text">Prepwise</span>
+          <span className="text-xl sm:text-2xl font-bold gradient-text">Prepwise</span>
         </div>
-        <div className="flex items-center gap-3">
-          <Link to="/login" className="text-text-secondary hover:text-white transition-colors text-sm font-medium px-5 py-2.5 rounded-xl hover:bg-dark-tertiary/50">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link to="/login" className="text-text-secondary hover:text-white transition-colors text-xs sm:text-sm font-medium px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl hover:bg-dark-tertiary/50">
             Sign In
           </Link>
-          <Link to="/register" className="text-white text-sm font-semibold px-6 py-2.5 rounded-xl hover:opacity-90 transition-all shadow-lg"
+          <Link to="/register" className="text-white text-xs sm:text-sm font-semibold px-4 py-2 sm:px-6 sm:py-2.5 rounded-xl hover:opacity-90 transition-all shadow-lg"
                 style={{ background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)', boxShadow: '0 4px 15px rgba(139,92,246,0.3)' }}>
             Get Started
           </Link>
@@ -56,7 +56,7 @@ export default function Landing() {
             AI-Powered Interview Preparation
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-8xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-8xl font-extrabold text-white leading-[1.1] mb-6 sm:mb-8 tracking-tight">
             Ace Your Next
             <br />
             <span className="gradient-text">Interview</span>
@@ -92,22 +92,22 @@ export default function Landing() {
           transition={{ duration: 0.7, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="mt-20 sm:mt-28 relative"
         >
-          <div className="glass-card rounded-3xl p-8 sm:p-12 lg:p-16 max-w-3xl mx-auto relative overflow-hidden">
+          <div className="glass-card rounded-3xl p-5 sm:p-12 lg:p-16 max-w-3xl mx-auto relative overflow-hidden">
             {/* subtle inner glow */}
             <div className="absolute inset-0 pointer-events-none"
                  style={{ background: 'radial-gradient(ellipse at center top, rgba(139,92,246,0.06) 0%, transparent 60%)' }} />
 
-            <div className="flex items-center justify-center mb-8 relative">
+            <div className="flex items-center justify-center mb-6 sm:mb-8 relative">
               <div className="relative">
-                <div className="w-28 h-28 rounded-full absolute inset-0 animate-ping opacity-20"
+                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full absolute inset-0 animate-ping opacity-20"
                      style={{ background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)' }} />
-                <div className="w-28 h-28 rounded-full flex items-center justify-center relative"
+                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center relative"
                      style={{
                        background: 'linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.15))',
                        border: '1px solid rgba(139,92,246,0.25)',
                        backdropFilter: 'blur(20px)',
                      }}>
-                  <div className="w-14 h-14 rounded-full"
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full"
                        style={{ background: 'linear-gradient(135deg, #8B5CF6, #6366F1, #3B82F6)' }} />
                 </div>
               </div>
@@ -144,8 +144,8 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16 sm:mb-20"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5">Everything You Need to Prepare</h2>
-            <p className="text-text-secondary text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5">Everything You Need to Prepare</h2>
+            <p className="text-text-secondary text-base sm:text-xl max-w-2xl mx-auto leading-relaxed">
               Our platform combines AI interviewing with comprehensive feedback to accelerate your preparation
             </p>
           </motion.div>
@@ -158,11 +158,11 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
-                className="glass-card-hover rounded-2xl p-7 sm:p-8 group cursor-default"
+                className="glass-card-hover rounded-2xl p-5 sm:p-8 group cursor-default"
               >
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-4 sm:mb-5 transition-all duration-300"
                      style={{ background: 'linear-gradient(135deg, rgba(139,92,246,0.12), rgba(59,130,246,0.12))' }}>
-                  <feature.icon className="w-7 h-7 text-accent-purple group-hover:text-accent-blue transition-colors duration-300" />
+                  <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-accent-purple group-hover:text-accent-blue transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-3">{feature.title}</h3>
                 <p className="text-text-secondary text-sm leading-relaxed">{feature.description}</p>
@@ -178,12 +178,12 @@ export default function Landing() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center glass-card rounded-3xl p-8 sm:p-16 lg:p-20 relative overflow-hidden"
+          className="max-w-4xl mx-auto text-center glass-card rounded-3xl p-6 sm:p-16 lg:p-20 relative overflow-hidden"
         >
           <div className="absolute inset-0 pointer-events-none"
                style={{ background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.06) 0%, transparent 60%)' }} />
           <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5">Ready to Ace Your Interview?</h2>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5">Ready to Ace Your Interview?</h2>
             <p className="text-text-secondary text-lg sm:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
               Start practicing now and build the confidence you need to land your dream job.
             </p>

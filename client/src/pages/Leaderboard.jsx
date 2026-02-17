@@ -61,17 +61,17 @@ export default function Leaderboard() {
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-2xl lg:text-3xl font-bold text-white">Leaderboard</h1>
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Leaderboard</h1>
         <p className="text-text-secondary text-sm mt-1">See how you rank against other Prepwise users</p>
       </div>
 
       {/* Ranking type tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
         {RANKING_TYPES.map((rt) => (
           <button
             key={rt.id}
             onClick={() => setType(rt.id)}
-            className={`flex items-center gap-3 p-4 rounded-2xl border transition-all text-left ${
+            className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-2xl border transition-all text-left ${
               type === rt.id
                 ? 'border-accent-purple/30 text-white'
                 : 'border-white/[0.06] text-text-secondary hover:border-white/10'
@@ -83,14 +83,14 @@ export default function Leaderboard() {
             }}
           >
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0"
               style={{ background: type === rt.id ? 'linear-gradient(135deg, #8B5CF6, #3B82F6)' : 'rgba(139,92,246,0.1)' }}
             >
-              <rt.icon className="w-5 h-5 text-white" />
+              <rt.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold truncate">{rt.label}</p>
-              <p className="text-[10px] text-text-muted truncate">{rt.description}</p>
+              <p className="text-xs sm:text-sm font-semibold truncate">{rt.label}</p>
+              <p className="text-[9px] sm:text-[10px] text-text-muted truncate hidden sm:block">{rt.description}</p>
             </div>
           </button>
         ))}
@@ -127,7 +127,7 @@ export default function Leaderboard() {
         <>
           {/* Top 3 Podium */}
           {top3.length > 0 && (
-            <div className="flex flex-col sm:flex-row items-center sm:items-end justify-center gap-4 sm:gap-5 pt-8 pb-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 pt-4 sm:pt-8 pb-4">
               {[1, 0, 2].map((podiumIdx) => {
                 const entry = top3[podiumIdx];
                 if (!entry) return <div key={podiumIdx} className="hidden sm:block w-28 sm:w-36" />;
@@ -140,7 +140,7 @@ export default function Leaderboard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: podiumIdx * 0.1 }}
-                    className={`flex flex-row sm:flex-col items-center gap-3 sm:gap-0 w-full sm:w-auto ${isCenter ? 'sm:w-40' : 'sm:w-36'}`}
+                    className={`flex flex-row sm:flex-col items-center gap-3 sm:gap-0 w-full sm:w-auto rounded-xl sm:rounded-none p-3 sm:p-0 border border-white/[0.06] sm:border-0 ${isCenter ? 'sm:w-40' : 'sm:w-36'}`}
                     style={{ order: style.order }}
                   >
                     <div className="relative shrink-0 sm:mb-3">

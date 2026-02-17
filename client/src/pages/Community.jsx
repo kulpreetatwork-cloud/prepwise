@@ -141,7 +141,7 @@ export default function Community() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-white">Community</h1>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Community</h1>
           <p className="text-text-secondary text-sm mt-1">Share experiences, ask questions, and learn from peers</p>
         </div>
         <button
@@ -157,12 +157,12 @@ export default function Community() {
       {/* Filters */}
       <div className="space-y-4">
         {/* Category tabs */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex overflow-x-auto gap-2 pb-1 -mx-1 px-1 sm:flex-wrap sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => { setCategory(cat.id); setPage(1); }}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              className={`shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                 category === cat.id
                   ? 'text-white'
                   : 'text-text-secondary hover:text-white hover:bg-dark-tertiary/60'

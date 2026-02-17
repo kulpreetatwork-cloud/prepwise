@@ -148,7 +148,7 @@ export default function Layout() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="flex-1 lg:ml-64 min-h-screen flex flex-col">
+      <main className="flex-1 lg:ml-64 min-h-screen flex flex-col overflow-x-hidden">
         {/* Top Header */}
         <header className="sticky top-0 z-20 border-b border-dark-border px-5 lg:px-8 py-4 flex items-center justify-between"
                 style={{ background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>

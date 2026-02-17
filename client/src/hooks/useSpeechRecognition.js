@@ -4,6 +4,12 @@ const SpeechRecognitionAPI = typeof window !== 'undefined'
   ? (window.SpeechRecognition || window.webkitSpeechRecognition)
   : null;
 
+const IS_MOBILE = typeof navigator !== 'undefined' &&
+  (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1);
+
+const MAX_RESTART_COUNT = IS_MOBILE ? 10 : 15;
+const RESTART_DELAY = IS_MOBILE ? 400 : 200;
+
 export function useSpeechRecognition() {
   const recognitionRef = useRef(null);
   const streamRef = useRef(null);
@@ -41,6 +47,8 @@ export function useSpeechRecognition() {
   }, []);
 
   const startAudioLevelMonitor = useCallback(async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true },
@@ -49,6 +57,11 @@ export function useSpeechRecognition() {
 
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       audioContextRef.current = ctx;
+
+      if (ctx.state === 'suspended') {
+        await ctx.resume();
+      }
+
       const source = ctx.createMediaStreamSource(stream);
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 256;
@@ -65,13 +78,13 @@ export function useSpeechRecognition() {
       };
       monitor();
     } catch {
-      // Audio level monitoring is optional — orb just won't pulse
+      // Audio level monitoring is optional -- orb just won't pulse
     }
   }, []);
 
   const spawnRecognition = useCallback(() => {
     const recognition = new SpeechRecognitionAPI();
-    recognition.continuous = true;
+    recognition.continuous = !IS_MOBILE;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
     recognition.maxAlternatives = 1;
@@ -107,7 +120,7 @@ export function useSpeechRecognition() {
     recognition.onerror = (event) => {
       const err = event.error;
       if (err === 'not-allowed') {
-        if (onErrorRef.current) onErrorRef.current('Microphone permission denied. Please allow mic access.');
+        if (onErrorRef.current) onErrorRef.current('Microphone permission denied. Please allow mic access in your browser settings.');
         isActiveRef.current = false;
         setIsListening(false);
         stopAudioLevel();
@@ -115,13 +128,15 @@ export function useSpeechRecognition() {
         const isElectron = /electron/i.test(navigator.userAgent);
         const msg = isElectron
           ? 'Speech recognition requires a real Chrome/Edge browser. Please open http://localhost:5173 in Chrome.'
-          : 'Speech recognition network error. Check your internet connection.';
+          : IS_MOBILE
+            ? 'Speech recognition requires an internet connection. Please check your network and try again.'
+            : 'Speech recognition network error. Check your internet connection.';
         if (onErrorRef.current) onErrorRef.current(msg);
         isActiveRef.current = false;
         setIsListening(false);
         stopAudioLevel();
       } else if (err === 'service-not-allowed') {
-        if (onErrorRef.current) onErrorRef.current('Speech recognition service not available. Please use Chrome or Edge.');
+        if (onErrorRef.current) onErrorRef.current('Speech recognition service not available. Please use Chrome or Edge on your device.');
         isActiveRef.current = false;
         setIsListening(false);
         stopAudioLevel();
@@ -135,7 +150,7 @@ export function useSpeechRecognition() {
 
       restartCountRef.current += 1;
 
-      if (restartCountRef.current > 15) {
+      if (restartCountRef.current > MAX_RESTART_COUNT) {
         if (onErrorRef.current) onErrorRef.current('Speech recognition stopped unexpectedly. Please click the mic again.');
         isActiveRef.current = false;
         setIsListening(false);
@@ -155,7 +170,7 @@ export function useSpeechRecognition() {
           setIsListening(false);
           stopAudioLevel();
         }
-      }, 200);
+      }, RESTART_DELAY);
     };
 
     return recognition;
@@ -222,7 +237,7 @@ export function useSpeechRecognition() {
       }
 
       recognition.onend = () => {
-        setTimeout(doResolve, 200);
+        setTimeout(doResolve, IS_MOBILE ? 400 : 200);
       };
       recognition.onerror = () => {};
 
@@ -232,7 +247,7 @@ export function useSpeechRecognition() {
         doResolve();
       }
 
-      setTimeout(doResolve, 2500);
+      setTimeout(doResolve, IS_MOBILE ? 3500 : 2500);
     });
   }, [stopAudioLevel]);
 
