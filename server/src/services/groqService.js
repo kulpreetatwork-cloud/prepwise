@@ -126,7 +126,7 @@ export async function generateInterviewResponse(config, transcript, timeState) {
   }
 
   const completion = await getGroq().chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
+    model: 'openai/gpt-oss-120b',
     messages,
     temperature: 0.7,
     max_tokens: 250,
@@ -184,7 +184,7 @@ SCORING GUIDE:
 - F (0-29): Failed to demonstrate competency`;
 
   const completion = await getGroq().chat.completions.create({
-    model: 'llama-3.3-70b-versatile',
+    model: 'openai/gpt-oss-120b',
     messages: [{ role: 'user', content: prompt }],
     temperature: 0.3,
     max_tokens: 3000,
